@@ -7,7 +7,7 @@
  * it, link to the dataset page on xoomar.com. Terms: https://xoomar.com/terms
  */
 
-export const VERSION = "0.1.0";
+export const VERSION = "0.1.1";
 const DEFAULT_BASE_URL = "https://xoomar.com";
 
 export type Params = Record<string, string | number | boolean | undefined | null>;
