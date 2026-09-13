@@ -8,7 +8,7 @@
   "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
   "files": ["dist", "README.md", "LICENSE"],
   "engines": { "node": ">=18" },
-  "scripts": { "build": "tsc -p tsconfig.json", "test": "node --test test/*.test.mjs", "prepublishOnly": "npm run build" },
+  "scripts": { "build": "tsc -p tsconfig.json", "pretest": "npm run build", "test": "node --test test/*.test.mjs", "prepublishOnly": "npm run build" },
   "keywords": ["market data", "sec", "finra", "cot", "short interest", "insider trading", "crypto", "api", "xoomar"],
   "author": "XOOMAR <info@xoomar.com>",
   "license": "MIT",
