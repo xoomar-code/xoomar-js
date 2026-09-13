@@ -3,11 +3,11 @@
  *
  * Every method resolves to the `data` part of the JSON response. The envelope
  * of the last call (`updatedAt`, `source`, `license`, `attribution`) is on
- * `client.lastMeta`. The data is free with attribution: when you republish
- * it, link to the dataset page on xoomar.com. Terms: https://xoomar.com/terms
+ * `client.lastMeta`. When you republish the data, link to the dataset page on
+ * xoomar.com; the terms of use are at https://xoomar.com/terms
  */
 
-export const VERSION = "0.1.1";
+export const VERSION = "0.1.2";
 const DEFAULT_BASE_URL = "https://xoomar.com";
 
 export type Params = Record<string, string | number | boolean | undefined | null>;
