@@ -13,7 +13,7 @@
   "author": "XOOMAR <info@xoomar.com>",
   "license": "MIT",
   "homepage": "https://xoomar.com/markets/api",
-  "repository": { "type": "git", "url": "git+https://github.com/xoomar-dev/xoomar-js.git" },
-  "bugs": { "url": "https://github.com/xoomar-dev/xoomar-js/issues" },
+  "repository": { "type": "git", "url": "git+https://github.com/xoomar-dev-cloud/xoomar-js.git" },
+  "bugs": { "url": "https://github.com/xoomar-dev-cloud/xoomar-js/issues" },
   "devDependencies": { "typescript": "^5.6.0", "@types/node": "^22.0.0" }
 }
