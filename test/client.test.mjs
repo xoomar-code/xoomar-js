@@ -26,6 +26,12 @@ test("path methods and flags", async () => {
   await x.largeHolders("HIMS", { form: "13D", new: true });
   assert.equal(calls[0], "https://xoomar.com/api/markets/insiders/nvda");
   assert.equal(calls[1], "https://xoomar.com/api/markets/large-holders?symbol=HIMS&form=13D&new=1");
+  await x.failsToDeliver("GME", { from: "2010-01-01", limit: 5000 });
+  await x.liquidationEvents({ symbol: "BTC", minUsd: 100000, limit: 5 });
+  await x.insiders("AAPL", { from: "2024-01-01" });
+  assert.equal(calls[2], "https://xoomar.com/api/markets/fails-to-deliver?symbol=GME&from=2010-01-01&limit=5000");
+  assert.equal(calls[3], "https://xoomar.com/api/markets/liquidations/recent?symbol=BTC&minUsd=100000&limit=5");
+  assert.equal(calls[4], "https://xoomar.com/api/markets/insiders/aapl?from=2024-01-01");
 });
 
 test("429 raises XoomarRateLimited with retryAfter", async () => {

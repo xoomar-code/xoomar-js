@@ -12,9 +12,11 @@ import { Xoomar } from "xoomar";
 const x = new Xoomar();                       // 30 requests a minute; new Xoomar({ apiKey }) for 120 with a free key
 
 (await x.shortInterest("GME"))[0];            // FINRA short interest, newest settlement first
-await x.shortVolume("GME", { days: 30 });     // FINRA daily short sale volume
-await x.failsToDeliver("GME");                // SEC fails to deliver
-await x.insiders("NVDA");                     // SEC Form 4 trades
+await x.shortVolume("GME", { days: 30 });     // FINRA daily short sale volume (since 2021)
+await x.failsToDeliver("GME", { from: "2010-01-01", limit: 5000 });   // whole history in one call
+await x.insiders("NVDA", { from: "2024-01-01" });   // SEC Form 4 trades, filings since 2020
+await x.liquidationEvents({ symbol: "BTC", minUsd: 100000 });   // individual liquidations, newest first
+await x.liquidationHistory({ symbol: "BTC", from: "2026-07-01" });   // hourly totals since June 2026
 await x.largeHolders("HIMS");                 // Schedule 13D and 13G holders
 (await x.financials("AAPL")).quarterly;       // XBRL income statement by quarter
 await x.fundHolders("AMZN");                  // which tracked 13F managers hold it

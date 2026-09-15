@@ -7,7 +7,7 @@
  * xoomar.com; the terms of use are at https://xoomar.com/terms
  */
 
-export const VERSION = "0.1.2";
+export const VERSION = "0.1.3";
 const DEFAULT_BASE_URL = "https://xoomar.com";
 
 export type Params = Record<string, string | number | boolean | undefined | null>;
@@ -98,11 +98,17 @@ export class Xoomar {
   /** FINRA short interest: a symbol's history newest first, or the latest settlement's highest days to cover. */
   shortInterest(symbol?: string) { return this.get("short-interest", { symbol }); }
   /** FINRA daily short sale volume: a symbol's history oldest first, or the latest day (sort "shares" for largest volumes). */
-  shortVolume(symbol?: string, opts: { days?: number; sort?: "shares" } = {}) { return this.get("short-volume", { symbol, ...opts }); }
+  /** FINRA daily short sale volume since August 2021: a symbol's history oldest first (from/to ISO dates, limit up to 5,000), or the latest day. */
+  shortVolume(symbol?: string, opts: { days?: number; sort?: "shares"; from?: string; to?: string; limit?: number } = {}) { return this.get("short-volume", { symbol, ...opts }); }
   /** SEC fails to deliver: a symbol's history oldest first, or the latest settlement date's largest fails. */
-  failsToDeliver(symbol?: string) { return this.get("fails-to-deliver", { symbol }); }
+  /** SEC fails to deliver since January 2010: a symbol's history oldest first (from/to ISO dates, limit up to 5,000), or the latest settlement's largest fails. */
+  failsToDeliver(symbol?: string, opts: { from?: string; to?: string; limit?: number } = {}) { return this.get("fails-to-deliver", { symbol, ...opts }); }
   /** SEC Form 4 trades: a ticker's history, or the latest across companies. */
-  insiders(ticker?: string, opts: { type?: string; window?: string } = {}) { return ticker ? this.get(`insiders/${ticker.toLowerCase()}`) : this.get("insiders", opts); }
+  /** SEC Form 4 trades: a ticker's history from filings since 2020 (from/to ISO dates, limit up to 2,000), or the latest across companies (type, window). */
+  insiders(ticker?: string, opts: { type?: string; window?: string; from?: string; to?: string; limit?: number } = {}) {
+    if (ticker) { const { from, to, limit } = opts; return this.get(`insiders/${ticker.toLowerCase()}`, { from, to, limit }); }
+    return this.get("insiders", { type: opts.type, window: opts.window });
+  }
   /** SEC Form 144 notices of proposed sale. */
   plannedSales(symbol?: string, opts: { days?: number } = {}) { return this.get("planned-sales", { symbol, ...opts }); }
   /** Schedule 13D and 13G cover pages. */
@@ -127,8 +133,12 @@ export class Xoomar {
   fundingRates(slug?: string) { return slug ? this.get(`funding-rates/${slug}`) : this.get("funding-rates"); }
   /** Hourly open interest history for a symbol slug. */
   openInterest(slug: string) { return this.get(`open-interest/${slug}`); }
-  /** Recent crypto liquidations across exchanges. */
+  /** 24-hour liquidation summary: totals, long/short split, hourly buckets, top contracts. */
   liquidations() { return this.get("liquidations"); }
+  /** Individual liquidation events, newest first (up to 500); filter by contract (BTC or BTCUSDT), exchange (okx, gate, htx), side and minimum notional. */
+  liquidationEvents(opts: { symbol?: string; exchange?: string; side?: "long" | "short"; minUsd?: number; limit?: number } = {}) { return this.get("liquidations/recent", opts); }
+  /** Hourly liquidation totals kept permanently (from 15 June 2026), oldest first; one contract with symbol, a window with from/to, up to 5,000 hours. */
+  liquidationHistory(opts: { symbol?: string; from?: string; to?: string; limit?: number } = {}) { return this.get("liquidations/history", opts); }
   /** Deribit options: put/call, max pain, DVOL for BTC or ETH. */
   options(currency: "BTC" | "ETH" = "BTC") { return this.get(`options/${currency}`); }
   /** Hyperliquid whale positions, all or for one coin. */

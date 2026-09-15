@@ -1,6 +1,6 @@
 {
   "name": "xoomar",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Client for the XOOMAR free market data API: short interest, insider trades, COT, funding rates, Fed liquidity, SEC filings and more.",
   "type": "module",
   "main": "./dist/index.js",
