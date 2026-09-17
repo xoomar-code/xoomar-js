@@ -110,6 +110,10 @@ export class Xoomar {
     return this.get("insiders", { type: opts.type, window: opts.window });
   }
   /** SEC Form 144 notices of proposed sale. */
+  /** Cluster buying: companies where several different insiders bought on the open market in the window (minInsiders default 3). */
+  insiderClusters(opts: { days?: number; minInsiders?: number; minUsd?: number; ticker?: string; limit?: number } = {}) { return this.get("insiders/clusters", opts); }
+  /** Regulation SHO threshold securities lists (Nasdaq and Cboe daily files since 2022): one date, one symbol's days on the list, or one market. */
+  thresholdList(opts: { date?: string; symbol?: string; market?: "nasdaq" | "cboe" | "nyse"; limit?: number } = {}) { return this.get("threshold-list", opts); }
   plannedSales(symbol?: string, opts: { days?: number } = {}) { return this.get("planned-sales", { symbol, ...opts }); }
   /** Schedule 13D and 13G cover pages. */
   largeHolders(symbol?: string, opts: { form?: "13D" | "13G"; days?: number; new?: boolean; sort?: "filed" | "percent" } = {}) { return this.get("large-holders", { symbol, form: opts.form, days: opts.days, new: flag(opts.new), sort: opts.sort }); }
@@ -165,6 +169,8 @@ export class Xoomar {
   rates(country?: string) { return country ? this.get(`rates/${country}`) : this.get("rates"); }
   /** US economic calendar with consensus and actuals. */
   calendar(opts: { from?: string; to?: string; importance?: string } = {}) { return this.get("calendar", opts); }
+  /** US Treasury auction results and calendar since 2010 (type "Note", "Bond", "TIPS", "FRN", "Bill", "CMB" or "all"; upcoming for announced auctions). */
+  treasuryAuctions(opts: { type?: string; term?: string; from?: string; to?: string; upcoming?: boolean; limit?: number } = {}) { return this.get("treasury-auctions", { type: opts.type, term: opts.term, from: opts.from, to: opts.to, upcoming: flag(opts.upcoming), limit: opts.limit }); }
 
   // ── filings and offerings ──
   /** SEC Form D private placements: largest raises in a window, one issuer by CIK, or sort "recent". */

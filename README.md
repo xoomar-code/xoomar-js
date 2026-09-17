@@ -1,6 +1,6 @@
 # xoomar
 
-JavaScript and TypeScript client for the [XOOMAR](https://xoomar.com/markets) free market data API: 29 datasets from primary sources (SEC EDGAR and XBRL, FINRA, CFTC, the Federal Reserve, USAspending, exchange APIs) as clean JSON, no key needed to start. Zero dependencies; Node 18+ or any runtime with `fetch`.
+JavaScript and TypeScript client for the [XOOMAR](https://xoomar.com/markets) free market data API: 31 datasets from primary sources (SEC EDGAR and XBRL, FINRA, CFTC, the Federal Reserve, USAspending, exchange APIs) as clean JSON, no key needed to start. Zero dependencies; Node 18+ or any runtime with `fetch`.
 
 ```bash
 npm install xoomar
@@ -26,6 +26,9 @@ await x.fundingRates();                       // perpetual funding on three exch
 await x.bitcoinTreasuries();                  // bitcoin on public balance sheets
 await x.formD({ days: 7 });                   // private placements filed this week
 await x.federalContracts({ ticker: "LMT" });  // federal contract actions
+await x.insiderClusters({ days: 30 });        // companies where 3+ insiders bought on the open market
+await x.thresholdList({ symbol: "GME" });     // Reg SHO threshold list days (Nasdaq and Cboe, since 2022)
+await x.treasuryAuctions({ term: "10-Year" }); // Treasury auction results since 2010
 ```
 
 Every method resolves to the `data` part of the response; `x.lastMeta` holds `updatedAt`, `source`, `license` and `attribution` from the last call. History endpoints keep the API's own order (short interest, insiders and COT newest first; short volume, fails to deliver and Fed liquidity oldest first); every row carries its date. `x.get("short-interest", { symbol: "TSLA" })` calls any endpoint directly and `x.csv("short-interest/csv")` fetches a CSV download.
@@ -34,7 +37,7 @@ Full endpoint reference, fields and limits: https://xoomar.com/markets/api
 
 ## Datasets
 
-Short interest, daily short volume, fails to deliver, insider trades (Form 4), planned sales (Form 144), large holders (13D/13G), 13F fund holdings, company financials and buybacks (XBRL), 8-K events, structured products, federal contracts, Form D private placements, the IPO pipeline, bitcoin treasuries, CFTC COT, funding rates, open interest, liquidations, options, whale positions, sentiment, signals, ETF flows, prediction markets, Fed liquidity, macro, policy rates, economic calendar.
+Short interest, daily short volume, fails to deliver, insider trades (Form 4), planned sales (Form 144), large holders (13D/13G), 13F fund holdings, company financials and buybacks (XBRL), 8-K events, structured products, federal contracts, Form D private placements, the IPO pipeline, bitcoin treasuries, Reg SHO threshold lists, Treasury auctions, insider cluster buying, CFTC COT, funding rates, open interest, liquidations, options, whale positions, sentiment, signals, ETF flows, prediction markets, Fed liquidity, macro, policy rates, economic calendar.
 
 ## Rate limits and keys
 

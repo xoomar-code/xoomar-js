@@ -32,6 +32,12 @@ test("path methods and flags", async () => {
   assert.equal(calls[2], "https://xoomar.com/api/markets/fails-to-deliver?symbol=GME&from=2010-01-01&limit=5000");
   assert.equal(calls[3], "https://xoomar.com/api/markets/liquidations/recent?symbol=BTC&minUsd=100000&limit=5");
   assert.equal(calls[4], "https://xoomar.com/api/markets/insiders/aapl?from=2024-01-01");
+  await x.insiderClusters({ days: 90, minInsiders: 2, minUsd: 100000 });
+  await x.thresholdList({ symbol: "GME" });
+  await x.treasuryAuctions({ term: "10-Year", upcoming: true });
+  assert.equal(calls[5], "https://xoomar.com/api/markets/insiders/clusters?days=90&minInsiders=2&minUsd=100000");
+  assert.equal(calls[6], "https://xoomar.com/api/markets/threshold-list?symbol=GME");
+  assert.equal(calls[7], "https://xoomar.com/api/markets/treasury-auctions?term=10-Year&upcoming=1");
 });
 
 test("429 raises XoomarRateLimited with retryAfter", async () => {
