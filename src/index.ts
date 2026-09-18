@@ -7,7 +7,7 @@
  * xoomar.com; the terms of use are at https://xoomar.com/terms
  */
 
-export const VERSION = "0.1.5";
+export const VERSION = "0.1.6";
 const DEFAULT_BASE_URL = "https://xoomar.com";
 
 export type Params = Record<string, string | number | boolean | undefined | null>;
@@ -161,8 +161,6 @@ export class Xoomar {
   etfFlows(opts: { asset?: "btc" | "eth"; days?: number } = {}) { return this.get("etf-flows", opts); }
   /** Bitcoin held by public companies from their SEC filings. */
   bitcoinTreasuries() { return this.get("bitcoin-treasuries"); }
-  /** Polymarket odds. */
-  predictions(category?: string) { return this.get("predictions", { category }); }
 
   // ── macro ──
   /** US Treasury yield curve, spreads, stablecoin supply. */

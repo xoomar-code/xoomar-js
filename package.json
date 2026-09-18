@@ -1,19 +1,53 @@
 {
   "name": "xoomar",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Client for the XOOMAR free market data API: short interest, insider trades, COT, funding rates, Fed liquidity, SEC filings and more.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
-  "files": ["dist", "README.md", "LICENSE"],
-  "engines": { "node": ">=18" },
-  "scripts": { "build": "tsc -p tsconfig.json", "pretest": "npm run build", "test": "node --test test/*.test.mjs", "prepublishOnly": "npm run build" },
-  "keywords": ["market data", "sec", "finra", "cot", "short interest", "insider trading", "crypto", "api", "xoomar"],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "pretest": "npm run build",
+    "test": "node --test test/*.test.mjs",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "market data",
+    "sec",
+    "finra",
+    "cot",
+    "short interest",
+    "insider trading",
+    "crypto",
+    "api",
+    "xoomar"
+  ],
   "author": "XOOMAR <info@xoomar.com>",
   "license": "Apache-2.0",
   "homepage": "https://xoomar.com/markets/api",
-  "repository": { "type": "git", "url": "git+https://github.com/xoomar-dev-cloud/xoomar-js.git" },
-  "bugs": { "url": "https://github.com/xoomar-dev-cloud/xoomar-js/issues" },
-  "devDependencies": { "typescript": "^5.6.0", "@types/node": "^22.0.0" }
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xoomar-dev-cloud/xoomar-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xoomar-dev-cloud/xoomar-js/issues"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "@types/node": "^22.0.0"
+  }
 }

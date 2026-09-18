@@ -1,6 +1,6 @@
 # xoomar
 
-JavaScript and TypeScript client for the [XOOMAR](https://xoomar.com/markets) free market data API: 32 datasets from primary sources (SEC EDGAR and XBRL, FINRA, CFTC, the Federal Reserve, USAspending, exchange APIs) as clean JSON, no key needed to start. Zero dependencies; Node 18+ or any runtime with `fetch`.
+JavaScript and TypeScript client for the [XOOMAR](https://xoomar.com/markets) free market data API: 31 datasets from primary sources (SEC EDGAR and XBRL, FINRA, CFTC, the Federal Reserve, USAspending, exchange APIs) as clean JSON, no key needed to start. Zero dependencies; Node 18+ or any runtime with `fetch`.
 
 ```bash
 npm install xoomar
