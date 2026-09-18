@@ -1,6 +1,6 @@
 # xoomar
 
-JavaScript and TypeScript client for the [XOOMAR](https://xoomar.com/markets) free market data API: 31 datasets from primary sources (SEC EDGAR and XBRL, FINRA, CFTC, the Federal Reserve, USAspending, exchange APIs) as clean JSON, no key needed to start. Zero dependencies; Node 18+ or any runtime with `fetch`.
+JavaScript and TypeScript client for the [XOOMAR](https://xoomar.com/markets) free market data API: 32 datasets from primary sources (SEC EDGAR and XBRL, FINRA, CFTC, the Federal Reserve, USAspending, exchange APIs) as clean JSON, no key needed to start. Zero dependencies; Node 18+ or any runtime with `fetch`.
 
 ```bash
 npm install xoomar
@@ -29,6 +29,8 @@ await x.federalContracts({ ticker: "LMT" });  // federal contract actions
 await x.insiderClusters({ days: 30 });        // companies where 3+ insiders bought on the open market
 await x.thresholdList({ symbol: "GME" });     // Reg SHO threshold list days (Nasdaq and Cboe, since 2022)
 await x.treasuryAuctions({ term: "10-Year" }); // Treasury auction results since 2010
+(await x.earningsFor("NVDA")).next;             // next expected earnings date (estimated from last year's 8-K)
+await x.earnings({ to: "2026-10-31" });           // the calendar: reported and estimated rows
 ```
 
 Every method resolves to the `data` part of the response; `x.lastMeta` holds `updatedAt`, `source`, `license` and `attribution` from the last call. History endpoints keep the API's own order (short interest, insiders and COT newest first; short volume, fails to deliver and Fed liquidity oldest first); every row carries its date. `x.get("short-interest", { symbol: "TSLA" })` calls any endpoint directly and `x.csv("short-interest/csv")` fetches a CSV download.

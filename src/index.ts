@@ -7,7 +7,7 @@
  * xoomar.com; the terms of use are at https://xoomar.com/terms
  */
 
-export const VERSION = "0.1.3";
+export const VERSION = "0.1.5";
 const DEFAULT_BASE_URL = "https://xoomar.com";
 
 export type Params = Record<string, string | number | boolean | undefined | null>;
@@ -127,6 +127,10 @@ export class Xoomar {
   fund(slug: string) { return this.get(`funds/${slug}`); }
   /** SEC 8-K material events. */
   events(opts: { ticker?: string; item?: string; days?: number } = {}) { return this.get("events", opts); }
+  /** Earnings calendar from 8-K Item 2.02 filings: the window's rows (default today to +14 days; status "reported" or "estimated"). */
+  earnings(opts: { from?: string; to?: string; status?: "reported" | "estimated"; ticker?: string; limit?: number } = {}) { return this.get("earnings", opts); }
+  /** One company's reported earnings dates since 2023 and the next estimate (an object with history, next, lastReported). */
+  earningsFor(ticker: string) { return this.get(`earnings/${ticker.toLowerCase()}`); }
   /** Bank structured notes from 424B2 and FWP filings. */
   structuredProducts(params: Params = {}) { return this.get("structured-products", params); }
   /** Largest US federal contract actions; by "ticker" sums by listed parent. */

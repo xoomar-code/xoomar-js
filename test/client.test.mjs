@@ -38,6 +38,10 @@ test("path methods and flags", async () => {
   assert.equal(calls[5], "https://xoomar.com/api/markets/insiders/clusters?days=90&minInsiders=2&minUsd=100000");
   assert.equal(calls[6], "https://xoomar.com/api/markets/threshold-list?symbol=GME");
   assert.equal(calls[7], "https://xoomar.com/api/markets/treasury-auctions?term=10-Year&upcoming=1");
+  await x.earnings({ status: "estimated", to: "2026-10-31" });
+  await x.earningsFor("NVDA");
+  assert.equal(calls[8], "https://xoomar.com/api/markets/earnings?status=estimated&to=2026-10-31");
+  assert.equal(calls[9], "https://xoomar.com/api/markets/earnings/nvda");
 });
 
 test("429 raises XoomarRateLimited with retryAfter", async () => {
