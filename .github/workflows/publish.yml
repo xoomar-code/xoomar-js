@@ -1,6 +1,6 @@
 # Publishes to npm through trusted publishing (OIDC): no token in the repo.
 # One-time setup on npmjs.com: package settings -> Trusted publisher -> GitHub Actions,
-# organization/user "xoomar-dev-cloud", repository "xoomar-js", workflow "publish.yml".
+# organization/user "xoomar-code", repository "xoomar-js", workflow "publish.yml".
 name: publish
 on:
   push:

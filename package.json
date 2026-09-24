@@ -1,6 +1,6 @@
 {
   "name": "xoomar",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Client for the XOOMAR free market data API: short interest, insider trades, COT, funding rates, Fed liquidity, SEC filings and more.",
   "type": "module",
   "main": "./dist/index.js",
@@ -41,10 +41,10 @@
   "homepage": "https://xoomar.com/markets/api",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xoomar-dev-cloud/xoomar-js.git"
+    "url": "git+https://github.com/xoomar-code/xoomar-js.git"
   },
   "bugs": {
-    "url": "https://github.com/xoomar-dev-cloud/xoomar-js/issues"
+    "url": "https://github.com/xoomar-code/xoomar-js/issues"
   },
   "devDependencies": {
     "typescript": "^5.6.0",
