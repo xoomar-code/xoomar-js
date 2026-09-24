@@ -9,12 +9,12 @@ npm install xoomar
 ```ts
 import { Xoomar } from "xoomar";
 
-const x = new Xoomar();                       // 30 requests a minute; new Xoomar({ apiKey }) for 120 with a free key
+const x = new Xoomar();                       // 10 requests a minute; new Xoomar({ apiKey }) for 30 with a free key
 
 (await x.shortInterest("GME"))[0];            // FINRA short interest, newest settlement first
 await x.shortVolume("GME", { days: 30 });     // FINRA daily short sale volume (since 2021)
-await x.failsToDeliver("GME", { from: "2010-01-01", limit: 5000 });   // whole history in one call
-await x.insiders("NVDA", { from: "2024-01-01" });   // SEC Form 4 trades, filings since 2020
+await x.failsToDeliver("GME", { from: "2026-04-01" });   // fails to deliver by settlement date
+await x.insiders("NVDA", { from: "2026-06-01" });   // SEC Form 4 trades
 await x.liquidationEvents({ symbol: "BTC", minUsd: 100000 });   // individual liquidations, newest first
 await x.liquidationHistory({ symbol: "BTC", from: "2026-07-01" });   // hourly totals since June 2026
 await x.largeHolders("HIMS");                 // Schedule 13D and 13G holders
@@ -22,14 +22,14 @@ await x.largeHolders("HIMS");                 // Schedule 13D and 13G holders
 await x.fundHolders("AMZN");                  // which tracked 13F managers hold it
 await x.cot("gold");                          // CFTC positioning history
 (await x.fedLiquidity()).at(-1);              // net liquidity, oldest first, so the last row is this week
-await x.fundingRates();                       // perpetual funding on three exchanges
+await x.fundingRates();                       // perpetual funding on six venues
 await x.bitcoinTreasuries();                  // bitcoin on public balance sheets
 await x.formD({ days: 7 });                   // private placements filed this week
 await x.federalContracts({ ticker: "LMT" });  // federal contract actions
 await x.insiderClusters({ days: 30 });        // companies where 3+ insiders bought on the open market
 await x.thresholdList({ symbol: "GME" });     // Reg SHO threshold list days (Nasdaq and Cboe, since 2022)
 await x.treasuryAuctions({ term: "10-Year" }); // Treasury auction results since 2010
-(await x.earningsFor("NVDA")).next;             // next expected earnings date (estimated from last year's 8-K)
+(await x.earningsFor("NVDA")).next;             // next expected earnings date (an estimate until confirmed)
 await x.earnings({ to: "2026-10-31" });           // the calendar: reported and estimated rows
 ```
 
@@ -39,11 +39,11 @@ Full endpoint reference, fields and limits: https://xoomar.com/markets/api
 
 ## Datasets
 
-Short interest, daily short volume, fails to deliver, insider trades (Form 4), planned sales (Form 144), large holders (13D/13G), 13F fund holdings, company financials and buybacks (XBRL), 8-K events, structured products, federal contracts, Form D private placements, the IPO pipeline, bitcoin treasuries, Reg SHO threshold lists, Treasury auctions, insider cluster buying, CFTC COT, funding rates, open interest, liquidations, options, whale positions, sentiment, signals, ETF flows, prediction markets, Fed liquidity, macro, policy rates, economic calendar.
+Short interest, daily short volume, fails to deliver, insider trades (Form 4), planned sales (Form 144), large holders (13D/13G), 13F fund holdings, company financials and buybacks (XBRL), 8-K events, structured products, federal contracts, Form D private placements, the IPO pipeline, bitcoin treasuries, Reg SHO threshold lists, Treasury auctions, insider cluster buying, CFTC COT, funding rates, open interest, liquidations, options, whale positions, sentiment, signals, ETF flows, Fed liquidity, macro, policy rates, the economic calendar and the earnings calendar (8-K Item 2.02).
 
 ## Rate limits and keys
 
-30 requests a minute per IP without a key. A free account at https://xoomar.com/signup gives a key for 120 a minute; pass it as `new Xoomar({ apiKey })`. A 429 rejects with `XoomarRateLimited` carrying `retryAfter`.
+10 requests a minute per IP without a key. A free account at https://xoomar.com/signup gives a key for 30 a minute; pass it as `new Xoomar({ apiKey })`. Keyless and free-key requests return up to six months of history. A 429 rejects with `XoomarRateLimited` carrying `retryAfter`.
 
 ## Data terms
 

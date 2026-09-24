@@ -7,7 +7,7 @@
  * xoomar.com; the terms of use are at https://xoomar.com/terms
  */
 
-export const VERSION = "0.1.7";
+export const VERSION = "0.1.8";
 const DEFAULT_BASE_URL = "https://xoomar.com";
 
 export type Params = Record<string, string | number | boolean | undefined | null>;
@@ -19,7 +19,7 @@ export class XoomarError extends Error {
   }
 }
 
-/** 429: 30 requests a minute without a key, 120 with a free key from https://xoomar.com/signup. */
+/** 429: 10 requests a minute without a key, 30 with a free key from https://xoomar.com/signup. */
 export class XoomarRateLimited extends XoomarError {
   constructor(status: number, body: string, url: string, public retryAfter: number | null) {
     super(status, body, url);
