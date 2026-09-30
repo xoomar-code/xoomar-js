@@ -22,7 +22,7 @@ await x.largeHolders("HIMS");                 // Schedule 13D and 13G holders
 await x.fundHolders("AMZN");                  // which tracked 13F managers hold it
 await x.cot("gold");                          // CFTC positioning history
 (await x.fedLiquidity()).at(-1);              // net liquidity, oldest first, so the last row is this week
-await x.fundingRates();                       // perpetual funding on six venues
+await x.fundingRates();                       // perpetual funding on five venues
 await x.bitcoinTreasuries();                  // bitcoin on public balance sheets
 await x.formD({ days: 7 });                   // private placements filed this week
 await x.federalContracts({ ticker: "LMT" });  // federal contract actions
