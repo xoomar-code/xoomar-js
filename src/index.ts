@@ -7,7 +7,7 @@
  * xoomar.com; the terms of use are at https://xoomar.com/terms
  */
 
-export const VERSION = "0.1.8";
+export const VERSION = "0.1.9";
 const DEFAULT_BASE_URL = "https://xoomar.com";
 
 export type Params = Record<string, string | number | boolean | undefined | null>;
